@@ -7,8 +7,9 @@ from django.contrib.auth.models import  AbstractBaseUser,\
 class  UserManager(BaseUserManager):
     def create_user(self, email,password = None, **extra_fields):
         """Create and Save a New User"""
-
-        user = self.model(email = email, **extra_fields)
+        if not email:
+            raise ValueError("You must inpul valid email")
+        user = self.model(email = self.normalize_email(email), **extra_fields)
         # Set encrypted password
         user.set_password(password)
         user.save(using = self._db) # (using = self._db ) it will help us to use multiple database
