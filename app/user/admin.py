@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from user import models
 
 class UserAdmin(BaseUserAdmin):
-    ordering = ["id"]
+    ordering = ['id']
     list_display = ['email', 'name']
 
 
